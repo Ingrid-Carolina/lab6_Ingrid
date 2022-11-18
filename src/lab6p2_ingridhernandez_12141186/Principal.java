@@ -5,6 +5,7 @@
 package lab6p2_ingridhernandez_12141186;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,9 +21,10 @@ public class Principal extends javax.swing.JFrame {
         DefaultComboBoxModel modelo
                 = (DefaultComboBoxModel) cb_Categoria.getModel();
         modelo.addElement( new Categoria("Panaderia"));
+      cb_Categoria.setModel(modelo);
       
-        
-        cb_Categoria.setModel(modelo);
+      
+      
     }
 
     /**
@@ -216,14 +218,13 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jLabel7))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -273,6 +274,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel15.setText("Crear Billetera");
 
         crear_categoria.setText("Crear");
+        crear_categoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crear_categoriaMouseClicked(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setText("Consumo Maximo");
@@ -281,6 +287,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel17.setText("Costo");
 
         Crear_Billetera.setText("Crear");
+        Crear_Billetera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Crear_BilleteraMouseClicked(evt);
+            }
+        });
 
         Crear_Alimento.setText("Crear");
 
@@ -466,6 +477,44 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void crear_categoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crear_categoriaMouseClicked
+        // TODO add your handling code here:
+       String nombre;
+        try{
+          nombre = jtf_categoria.getText(); 
+          jtf_categoria.setText("");
+          DefaultComboBoxModel modelo1
+                = (DefaultComboBoxModel) cb_Categoria.getModel();
+          modelo1.addElement( new Categoria(nombre));
+      cb_Categoria.setModel(modelo1);
+          JOptionPane.showMessageDialog(this,
+                 "se Creo una Categoria");
+        }catch(Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                 "Ocurrio un error y no se guardaron los datos");
+        }     
+    }//GEN-LAST:event_crear_categoriaMouseClicked
+
+    private void Crear_BilleteraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Crear_BilleteraMouseClicked
+        // TODO add your handling code here:
+        int costo;
+        int max;
+        try{
+          costo =Integer.parseInt(jtff_CostoBilletera.getText());
+           max= Integer.parseInt(jtff_cosumoMax.getText());
+           jtff_CostoBilletera.setText("");
+           jtff_cosumoMax.setText("");
+           
+          JOptionPane.showMessageDialog(this,
+                 "se Creo una Billetera");
+        }catch(Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                 "Ocurrio un error y no se guardaron los datos");
+        } 
+    }//GEN-LAST:event_Crear_BilleteraMouseClicked
 
     /**
      * @param args the command line arguments
