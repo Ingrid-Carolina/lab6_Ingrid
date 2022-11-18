@@ -4,10 +4,14 @@
  */
 package lab6p2_ingridhernandez_12141186;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -23,12 +27,11 @@ public class Principal extends javax.swing.JFrame {
         this.setSize(622, 500);
         DefaultComboBoxModel modelo
                 = (DefaultComboBoxModel) cb_Categoria.getModel();
-        
-        p.add( new Categoria("Panaderia"));
+
+        p.add(new Categoria("Panaderia"));
         modelo.addElement(p.get(0));
-      cb_Categoria.setModel(modelo);
-      
-       
+        cb_Categoria.setModel(modelo);
+        DefaulteJugador();
     }
 
     /**
@@ -43,7 +46,7 @@ public class Principal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jtree_Cat = new javax.swing.JTree();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,9 +61,9 @@ public class Principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jL_Alimentos = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        jL_Billetera = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -95,8 +98,8 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(jTree1);
+        jtree_Cat.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(jtree_Cat);
 
         jButton1.setText("Alimentar");
 
@@ -130,13 +133,13 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4)))
                         .addGap(8, 8, 8))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -151,7 +154,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
@@ -161,9 +164,9 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Juego", jPanel1);
@@ -176,11 +179,11 @@ public class Principal extends javax.swing.JFrame {
 
         jButton3.setText("Comprar");
 
-        jList2.setModel(new DefaultListModel());
-        jScrollPane7.setViewportView(jList2);
+        jL_Alimentos.setModel(new DefaultListModel());
+        jScrollPane7.setViewportView(jL_Alimentos);
 
-        jList3.setModel(new DefaultListModel());
-        jScrollPane8.setViewportView(jList3);
+        jL_Billetera.setModel(new DefaultListModel());
+        jScrollPane8.setViewportView(jL_Billetera);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -201,7 +204,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jLabel7))
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +238,13 @@ public class Principal extends javax.swing.JFrame {
         jtff_costo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("########"))));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("Categaria");
+        jLabel11.setText("Categoria");
+
+        cb_Categoria.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                cb_CategoriaComponentHidden(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Calorias");
@@ -314,7 +323,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(crear_categoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Crear_Alimento, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +369,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(Crear_Billetera))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtff_CostoBilletera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crafteo", jPanel3);
@@ -399,7 +408,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel19)
@@ -440,7 +449,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(353, 402, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -451,9 +460,9 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -461,49 +470,62 @@ public class Principal extends javax.swing.JFrame {
 
     private void crear_categoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crear_categoriaMouseClicked
         // TODO add your handling code here:
-       String nombre;
-        try{
-          nombre = jtf_categoria.getText(); 
-          jtf_categoria.setText("");
-          // DefaultComboBoxModel modelo1= (DefaultComboBoxModel) cb_Categoria.getModel();
-          DefaultComboBoxModel modelo1= new DefaultComboBoxModel();
-          
-     // cb_Categoria.setModel(modelo1);
-      Categoria po = new Categoria (nombre);
-      p.add(po);
+        String nombre;
+        try {
+            nombre = jtf_categoria.getText();
+            jtf_categoria.setText("");
+            
+            DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
+
+           
+            Categoria po = new Categoria(nombre);
+            p.add(po);
             for (int i = 0; i < p.size(); i++) {
                 modelo1.addElement(p.get(i));
             }
             cb_Categoria.setModel(modelo1);
-          JOptionPane.showMessageDialog(this,
-                 "Se creo una Categoria");
+            JOptionPane.showMessageDialog(this,"Se creo una Categoria");
+            DefaultTreeModel m = (DefaultTreeModel) jtree_Cat.getModel();//para capturar el modelo del arbol
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot(); //para capturar la raiz del arbol
+            DefaultMutableTreeNode nodo_Categoria;//crear un nodo 
+        //llenar el nodo
+        nodo_Categoria= new DefaultMutableTreeNode( new Categoria(jtf_nombre.getText() ) );
+        //crear el nodo
+             DefaultMutableTreeNode nodo_Alimentos;
+             //llenar nodo 
+             nodo_Alimentos = new DefaultMutableTreeNode(new Alimento (jtf_nombre.getText()));   
             System.out.println(p);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this,
-                 "Ocurrio un error y no se guardaron los datos");
-        }     
+                    "Ocurrio un error y no se guardaron los datos");
+        }
     }//GEN-LAST:event_crear_categoriaMouseClicked
 
     private void Crear_BilleteraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Crear_BilleteraMouseClicked
         // TODO add your handling code here:
         int costo;
         int max;
-        try{
-          costo =Integer.parseInt(jtff_CostoBilletera.getText());
-           max= Integer.parseInt(jtff_cosumoMax.getText());
-           Billetera bi = new Billetera (costo,max);
-           b.add(bi);
-           jtff_CostoBilletera.setText("");
-           jtff_cosumoMax.setText("");
+        try {
+            costo = Integer.parseInt(jtff_CostoBilletera.getText());
+            max = Integer.parseInt(jtff_cosumoMax.getText());
+            Billetera bi = new Billetera(costo, max);
+            b.add(bi);
+
+            DefaultListModel modelo
+                    = (DefaultListModel) jL_Billetera.getModel();
+            modelo.addElement(new Billetera(Integer.parseInt(jtff_CostoBilletera.getText()),
+                    Integer.parseInt(jtff_cosumoMax.getText())));
+            JOptionPane.showMessageDialog(this,
+                    "Se creo una Billetera");
+            jtff_CostoBilletera.setText("");
+            jtff_cosumoMax.setText("");
             System.out.println(bi);
-          JOptionPane.showMessageDialog(this,
-                 "Se creo una Billetera");
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this,
-                 "Ocurrio un error y no se guardaron los datos");
-        } 
+                    "Ocurrio un error y no se guardaron los datos");
+        }
     }//GEN-LAST:event_Crear_BilleteraMouseClicked
 
     private void Crear_AlimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Crear_AlimentoMouseClicked
@@ -512,28 +534,35 @@ public class Principal extends javax.swing.JFrame {
         int costo;
         int cal;
         DefaultComboBoxModel modelo1 = (DefaultComboBoxModel) cb_Categoria.getModel();
-        Categoria c = (Categoria)modelo1.getSelectedItem();
-        try{
+        Categoria c = (Categoria) modelo1.getSelectedItem();
+        try {
             nombre = jtf_nombre.getText();
-            costo =Integer.parseInt(jtff_costo.getText());
-           cal= Integer.parseInt(jtff_calorias.getText());
-           Alimento alim = new Alimento(nombre,costo,cal,c);
-           lista.add(alim);
-           
-           jtf_nombre.setText("");
-           jtff_costo.setText("");
-           jtff_calorias.setText("");
-           cb_Categoria.setSelectedIndex(0);
+            costo = Integer.parseInt(jtff_costo.getText());
+            cal = Integer.parseInt(jtff_calorias.getText());
+            Alimento alim = new Alimento(nombre, costo, cal, c);
+            lista.add(alim);
+            DefaultListModel modelo
+                    = (DefaultListModel) jL_Alimentos.getModel();
+            modelo.addElement(new Alimento(jtf_nombre.getText(),Integer.parseInt(jtff_costo.getText()),
+                   Integer.parseInt(jtff_calorias.getText()),c));
+            jtf_nombre.setText("");
+            jtff_costo.setText("");
+            jtff_calorias.setText("");
+            cb_Categoria.setSelectedIndex(0);
             System.out.println(alim);
-           JOptionPane.showMessageDialog(this,
-                 "Se creo una Alimento");
-        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Se creo una Alimento");
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this,
-                 "Ocurrio un error y no se guardaron los datos");
-        } 
-        
+                    "Ocurrio un error y no se guardaron los datos");
+        }
+
     }//GEN-LAST:event_Crear_AlimentoMouseClicked
+
+    private void cb_CategoriaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cb_CategoriaComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_CategoriaComponentHidden
 
     /**
      * @param args the command line arguments
@@ -568,8 +597,60 @@ public class Principal extends javax.swing.JFrame {
                 new Principal().setVisible(true);
             }
         });
+        
     }
+    public void DefaulteJugador(){
+        p.add(new Categoria("Pizza"));
+        p.add(new Categoria("Mini super"));
 
+        lista.add(new Alimento("PAN", 34, 200, p.get(0)));
+        lista.add(new Alimento("Jamon", 60, 500, p.get(1)));
+        lista.add(new Alimento("queso", 50, 300, p.get(1)));
+        lista.add(new Alimento("milk", 25, 150, p.get(0)));
+        lista.add(new Alimento("pollo", 150, 400, p.get(1)));
+        lista.add(new Alimento("algodon de Azucar", 15, 320, p.get(0)));
+        lista.add(new Alimento("Res", 90, 560, p.get(1)));
+        lista.add(new Alimento("Cerdo", 90, 602, p.get(1)));
+        lista.add(new Alimento("Huevos", 5, 50, p.get(1)));
+        lista.add(new Alimento("pasta", 85, 230, p.get(1)));
+
+        b.add(new Billetera(10,230));
+        b.add(new Billetera(6,120));
+        b.add(new Billetera(3,90));
+        
+        j.add(new Jugadores("Pedro","Pedro12",1,400,lista.get(0),b.get(0)));
+        j.add(new Jugadores("James","James25",2,800,lista.get(1),b.get(1)));
+        j.add(new Jugadores("Nuila","Nuila21",3,1600,lista.get(2),b.get(2)));
+        j.add(new Jugadores("Carlos","Carlos14",4,2500,lista.get(3),b.get(0)));
+        j.add(new Jugadores("Hector","Hector70",5,3000,lista.get(4),b.get(1)));
+        j.add(new Jugadores("Esther","Esther15",6,16000,lista.get(5),b.get(2)));
+        j.add(new Jugadores("lesly","lesly20",7,24000,lista.get(6),b.get(0)));
+        j.add(new Jugadores("Paola","Paola25",8,30000,lista.get(7),b.get(1)));
+        j.add(new Jugadores("Fer","Fer23",9,35000,lista.get(8),b.get(2)));
+        j.add(new Jugadores("Maria","Maria80",10,40000,lista.get(9),b.get(0)));
+        ActList();
+        DefaultListModel modelo = new DefaultListModel();
+        for (Jugadores jugador : j) {
+            modelo.addElement(jugador.toString());
+        }
+        jList1.setModel(modelo);
+    }
+    private void ActList(){
+        for (Alimento alimento : lista) {
+            DefaultListModel modelo
+                    = (DefaultListModel) jL_Alimentos.getModel();
+            modelo.addElement(alimento);
+        }for (Billetera billetera : b) {
+            DefaultListModel modelo
+                    = (DefaultListModel) jL_Billetera.getModel();
+            modelo.addElement(billetera);
+        }for (Categoria categoria : p) {
+            DefaultComboBoxModel modelo
+                    = (DefaultComboBoxModel)cb_Categoria.getModel();
+            modelo.addElement(categoria);
+        }
+    }
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Crear_Alimento;
     private javax.swing.JButton Crear_Billetera;
@@ -581,6 +662,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JList<String> jL_Alimentos;
+    private javax.swing.JList<String> jL_Billetera;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -601,8 +684,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -615,15 +696,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTree jTree1;
     private javax.swing.JTextField jtf_categoria;
     private javax.swing.JTextField jtf_nombre;
     private javax.swing.JFormattedTextField jtff_CostoBilletera;
     private javax.swing.JFormattedTextField jtff_calorias;
     private javax.swing.JFormattedTextField jtff_costo;
     private javax.swing.JFormattedTextField jtff_cosumoMax;
+    private javax.swing.JTree jtree_Cat;
     // End of variables declaration//GEN-END:variables
-ArrayList<Alimento> lista = new ArrayList();
-ArrayList<Categoria> p = new ArrayList();
-ArrayList<Billetera> b = new ArrayList();
+    static ArrayList<Alimento> lista = new ArrayList();
+    static ArrayList<Categoria> p = new ArrayList();
+    static ArrayList<Billetera> b = new ArrayList();
+    static ArrayList<Jugadores> j = new ArrayList();
+     DefaultMutableTreeNode nodo_seleccionado;
 }

@@ -17,6 +17,10 @@ public class Alimento {
     public Alimento() {
     }
 
+    public Alimento(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
     public Alimento(String Nombre, int costo, int calorias, Categoria ca) {
         this.Nombre = Nombre;
         this.costo = costo;
