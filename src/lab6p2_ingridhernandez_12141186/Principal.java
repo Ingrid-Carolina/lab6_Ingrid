@@ -61,8 +61,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        comprar_Alimento = new javax.swing.JButton();
+        comprar_billetera = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         jL_Alimentos = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
@@ -203,9 +203,19 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel7.setText("1000");
 
-        jButton2.setText("Comprar");
+        comprar_Alimento.setText("Comprar");
+        comprar_Alimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comprar_AlimentoMouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("Comprar");
+        comprar_billetera.setText("Comprar");
+        comprar_billetera.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comprar_billeteraMouseClicked(evt);
+            }
+        });
 
         jL_Alimentos.setModel(new DefaultListModel());
         jScrollPane7.setViewportView(jL_Alimentos);
@@ -224,14 +234,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comprar_billetera, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7))
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(comprar_Alimento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -242,11 +252,11 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comprar_Alimento, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(comprar_billetera)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -616,6 +626,38 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_SeleccionarActionPerformed
 
+    private void comprar_billeteraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comprar_billeteraMouseClicked
+        // TODO add your handling code here:
+        int num =jL_Billetera.getSelectedIndex();
+      
+        int pos = jList1.getSelectedIndex();
+        if (j.get(pos).getPunto() >= b.get(num).getCosto()) {
+            j.get(pos).setBilletera(b.get(num));
+            JOptionPane.showMessageDialog(rootPane, "Compra exitosa");
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Insuficiente");
+
+        }
+    }//GEN-LAST:event_comprar_billeteraMouseClicked
+
+    private void comprar_AlimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comprar_AlimentoMouseClicked
+        // TODO add your handling code here:
+        int num =jL_Alimentos.getSelectedIndex();
+      
+        int pos = jList1.getSelectedIndex();
+        if (j.get(pos).getPunto() >= lista.get(num).getCosto()) {
+            j.get(pos).setAlimento(lista.get(num));
+            JOptionPane.showMessageDialog(rootPane, "Compra exitosa");
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Insuficiente");
+
+        }
+        
+        
+    }//GEN-LAST:event_comprar_AlimentoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -732,10 +774,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Enviar_Solicitud;
     private javax.swing.JMenuItem Seleccionar;
     private javax.swing.JComboBox<String> cb_Categoria;
+    private javax.swing.JButton comprar_Alimento;
+    private javax.swing.JButton comprar_billetera;
     private javax.swing.JButton crear_categoria;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox2;
