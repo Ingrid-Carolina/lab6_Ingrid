@@ -107,9 +107,14 @@ public class Principal extends javax.swing.JFrame {
         menu_popup.add(opcion_Eliminar);
 
         Seleccionar.setText("Seleccionar");
+        Seleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeleccionarActionPerformed(evt);
+            }
+        });
         menu_popup.add(Seleccionar);
 
-        Enviar_Solicitud.setText("jMenuItem3");
+        Enviar_Solicitud.setText("Enviar Solicutud");
         menu_popup.add(Enviar_Solicitud);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -604,6 +609,12 @@ public class Principal extends javax.swing.JFrame {
         }
      llenarArbol();
     }//GEN-LAST:event_opcion_EliminarActionPerformed
+
+    private void SeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeleccionarActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(jtree_Cat, "Selecciono ");
+        
+    }//GEN-LAST:event_SeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
