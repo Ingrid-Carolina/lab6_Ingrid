@@ -4,9 +4,7 @@
  */
 package lab6p2_ingridhernandez_12141186;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -32,6 +30,7 @@ public class Principal extends javax.swing.JFrame {
         modelo.addElement(p.get(0));
         cb_Categoria.setModel(modelo);
         DefaulteJugador();
+        llenarArbol();
     }
 
     /**
@@ -87,12 +86,12 @@ public class Principal extends javax.swing.JFrame {
         Crear_Alimento = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,9 +122,9 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(29, 29, 29)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -139,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4)))
                         .addGap(8, 8, 8))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -377,19 +376,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel18.setText("Amigos");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Usuario", "Nivel"
-            }
-        ));
-        jScrollPane5.setViewportView(jTable4);
-
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel19.setText("Solicitudes de Amistad");
 
@@ -397,18 +383,13 @@ public class Principal extends javax.swing.JFrame {
 
         jButton8.setText("Rechazar");
 
+        jList2.setModel(new DefaultListModel());
+        jScrollPane2.setViewportView(jList2);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel19)
@@ -418,6 +399,14 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,8 +414,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -434,7 +423,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton7)
                     .addComponent(jButton8))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Amigo", jPanel4);
@@ -449,7 +438,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(353, 402, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -485,15 +474,7 @@ public class Principal extends javax.swing.JFrame {
             }
             cb_Categoria.setModel(modelo1);
             JOptionPane.showMessageDialog(this,"Se creo una Categoria");
-            DefaultTreeModel m = (DefaultTreeModel) jtree_Cat.getModel();//para capturar el modelo del arbol
-            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot(); //para capturar la raiz del arbol
-            DefaultMutableTreeNode nodo_Categoria;//crear un nodo 
-        //llenar el nodo
-        nodo_Categoria= new DefaultMutableTreeNode( new Categoria(jtf_nombre.getText() ) );
-        //crear el nodo
-             DefaultMutableTreeNode nodo_Alimentos;
-             //llenar nodo 
-             nodo_Alimentos = new DefaultMutableTreeNode(new Alimento (jtf_nombre.getText()));   
+            
             System.out.println(p);
         } catch (Exception e) {
             e.printStackTrace();
@@ -650,7 +631,31 @@ public class Principal extends javax.swing.JFrame {
             modelo.addElement(categoria);
         }
     }
-  
+    private void llenarArbol() {
+        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Raiz"); //para capturar la raiz del arbol
+        for (int i = 0; i < p.size(); i++) {
+            DefaultMutableTreeNode nodo_Categoria;//crear un nodo
+            nodo_Categoria = new DefaultMutableTreeNode(p.get(i));
+            for (int k = 0; k < lista.size(); k++) {
+                if (lista.get(k).getCa() == p.get(i)) {
+                    DefaultMutableTreeNode nodo_Alimentos;
+                    nodo_Alimentos = new DefaultMutableTreeNode(lista.get(k));
+                    for (int l = 0; l < j.size(); l++) {
+                        if (j.get(l).getAlimento() == lista.get(k)) {
+                            DefaultMutableTreeNode nodo_jugador = new DefaultMutableTreeNode(j.get(l));
+                            nodo_Alimentos.add(nodo_jugador);
+                        }
+                    }
+                    nodo_Categoria.add(nodo_Alimentos);
+                }
+            }
+            raiz.add(nodo_Categoria);
+        }
+        DefaultTreeModel m = new DefaultTreeModel(raiz); //para capturar el modelo del arbol
+        m.reload();
+        jtree_Cat.setModel(m);
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Crear_Alimento;
     private javax.swing.JButton Crear_Billetera;
@@ -684,18 +689,18 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jtf_categoria;
     private javax.swing.JTextField jtf_nombre;
     private javax.swing.JFormattedTextField jtff_CostoBilletera;
