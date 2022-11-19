@@ -42,6 +42,10 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menu_popup = new javax.swing.JPopupMenu();
+        opcion_Eliminar = new javax.swing.JMenuItem();
+        Seleccionar = new javax.swing.JMenuItem();
+        Enviar_Solicitud = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -94,10 +98,30 @@ public class Principal extends javax.swing.JFrame {
         jList2 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
 
+        opcion_Eliminar.setText("Eliminar");
+        opcion_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                opcion_EliminarActionPerformed(evt);
+            }
+        });
+        menu_popup.add(opcion_Eliminar);
+
+        Seleccionar.setText("Seleccionar");
+        menu_popup.add(Seleccionar);
+
+        Enviar_Solicitud.setText("jMenuItem3");
+        menu_popup.add(Enviar_Solicitud);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Root");
         jtree_Cat.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jtree_Cat.setComponentPopupMenu(menu_popup);
+        jtree_Cat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtree_CatMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtree_Cat);
 
         jButton1.setText("Alimentar");
@@ -138,7 +162,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel4)))
                         .addGap(8, 8, 8))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -406,7 +430,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,7 +465,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -466,7 +490,6 @@ public class Principal extends javax.swing.JFrame {
             
             DefaultComboBoxModel modelo1 = new DefaultComboBoxModel();
 
-           
             Categoria po = new Categoria(nombre);
             p.add(po);
             for (int i = 0; i < p.size(); i++) {
@@ -474,7 +497,7 @@ public class Principal extends javax.swing.JFrame {
             }
             cb_Categoria.setModel(modelo1);
             JOptionPane.showMessageDialog(this,"Se creo una Categoria");
-            
+            llenarArbol();
             System.out.println(p);
         } catch (Exception e) {
             e.printStackTrace();
@@ -531,6 +554,7 @@ public class Principal extends javax.swing.JFrame {
             jtff_calorias.setText("");
             cb_Categoria.setSelectedIndex(0);
             System.out.println(alim);
+            llenarArbol();
             JOptionPane.showMessageDialog(this,
                     "Se creo una Alimento");
         } catch (Exception e) {
@@ -544,6 +568,42 @@ public class Principal extends javax.swing.JFrame {
     private void cb_CategoriaComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cb_CategoriaComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_CategoriaComponentHidden
+
+    private void jtree_CatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtree_CatMouseClicked
+        // TODO add your handling code here:
+          if (evt.isMetaDown()) {
+              int row = jtree_Cat.getClosestRowForLocation(evt.getX(), evt.getY());
+              jtree_Cat.setSelectionRow(row);
+              Object v1=  jtree_Cat.getSelectionPath().
+                    getLastPathComponent();
+              nodo_seleccionado = (DefaultMutableTreeNode) v1;
+              if (nodo_seleccionado.getUserObject() instanceof Jugadores) {//si hay un persona
+                persona_seleccionada= (Jugadores) nodo_seleccionado.
+                        getUserObject();
+                menu_popup.show(evt.getComponent(),
+                        evt.getX(), evt.getY());//mostar el menu
+            }
+          }
+    }//GEN-LAST:event_jtree_CatMouseClicked
+
+    private void opcion_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opcion_EliminarActionPerformed
+        // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(
+                this,
+                "Seguro de Eliminar?",
+                "Confirm",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        if (response == JOptionPane.OK_OPTION) {//para el eliminar el nodo del arbol
+            DefaultTreeModel m = (DefaultTreeModel) jtree_Cat.getModel(); 
+            DefaultMutableTreeNode nodo = (DefaultMutableTreeNode)m.getRoot();
+            DefaultMutableTreeNode N =(DefaultMutableTreeNode)jtree_Cat.getLastSelectedPathComponent();
+            Jugadores ju = (Jugadores)N.getUserObject();
+            j.remove(ju);
+        }
+     llenarArbol();
+    }//GEN-LAST:event_opcion_EliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -618,8 +678,7 @@ public class Principal extends javax.swing.JFrame {
     }
     private void ActList(){
         for (Alimento alimento : lista) {
-            DefaultListModel modelo
-                    = (DefaultListModel) jL_Alimentos.getModel();
+            DefaultListModel modelo = (DefaultListModel) jL_Alimentos.getModel();
             modelo.addElement(alimento);
         }for (Billetera billetera : b) {
             DefaultListModel modelo
@@ -632,7 +691,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }
     private void llenarArbol() {
-        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Raiz"); //para capturar la raiz del arbol
+        DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Categoria"); //para capturar la raiz del arbol
         for (int i = 0; i < p.size(); i++) {
             DefaultMutableTreeNode nodo_Categoria;//crear un nodo
             nodo_Categoria = new DefaultMutableTreeNode(p.get(i));
@@ -659,6 +718,8 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Crear_Alimento;
     private javax.swing.JButton Crear_Billetera;
+    private javax.swing.JMenuItem Enviar_Solicitud;
+    private javax.swing.JMenuItem Seleccionar;
     private javax.swing.JComboBox<String> cb_Categoria;
     private javax.swing.JButton crear_categoria;
     private javax.swing.JButton jButton1;
@@ -708,10 +769,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jtff_costo;
     private javax.swing.JFormattedTextField jtff_cosumoMax;
     private javax.swing.JTree jtree_Cat;
+    private javax.swing.JPopupMenu menu_popup;
+    private javax.swing.JMenuItem opcion_Eliminar;
     // End of variables declaration//GEN-END:variables
     static ArrayList<Alimento> lista = new ArrayList();
     static ArrayList<Categoria> p = new ArrayList();
     static ArrayList<Billetera> b = new ArrayList();
     static ArrayList<Jugadores> j = new ArrayList();
      DefaultMutableTreeNode nodo_seleccionado;
+     Jugadores persona_seleccionada;
 }
